@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Resources;
 using NUnit.Framework;
-using FakeItEasy;
-using FakeItEasy.Sdk;
+using PortfolioLibrary;
 
-namespace PortfolioLibrary
+namespace PortfolioUnitTests
 
 {
     public class WebConnectionTests

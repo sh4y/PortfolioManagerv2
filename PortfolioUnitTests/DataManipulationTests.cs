@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using NUnit.Framework;
 using PortfolioLibrary;
@@ -30,7 +29,7 @@ namespace PortfolioUnitTests
                 }
             }
 
-            string[] result = new DataManipulator().getRawData(sb.ToString());
+            string[] result = new DataManipulator().GetRawData(sb.ToString());
 
             Assert.AreEqual(arr.ToArray(), result);
 

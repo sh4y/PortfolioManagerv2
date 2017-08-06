@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using PortfolioLibrary;
+using PortfolioLibrary.Objects;
 
 namespace PortfolioUnitTests
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PortfolioLibrary
+﻿namespace PortfolioLibrary
 {
     public class DataManipulator
     {
@@ -21,7 +15,7 @@ namespace PortfolioLibrary
             return res;
         }
 
-        public string[] getRawData(string content)
+        public string[] GetRawData(string content)
         {
             string[] data = content.Split('\n');
             return Slice(data, 7, data.Length-1);

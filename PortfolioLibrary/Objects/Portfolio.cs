@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PortfolioLibrary
+namespace PortfolioLibrary.Objects
 {
     public class Portfolio
     {

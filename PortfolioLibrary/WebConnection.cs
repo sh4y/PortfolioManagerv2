@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Text;
 
@@ -21,12 +20,15 @@ namespace PortfolioLibrary
                     var receiveStream = res.GetResponseStream();
                     StreamReader readStream = null;
                     if (receiveStream != null)
-                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(res.CharacterSet));
-                    if (readStream != null)
-                        data = readStream.ReadToEnd();
+                    {
+                        if (res.CharacterSet != null)
+                            readStream = new StreamReader(receiveStream, Encoding.GetEncoding(res.CharacterSet));
+                        if (readStream != null)
+                            data = readStream.ReadToEnd();
+                    }
                 }
             }
-            catch (WebException e)
+            catch (WebException)
             {
                 return InvalidUrlError;
             }
