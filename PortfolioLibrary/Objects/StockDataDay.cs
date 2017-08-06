@@ -1,6 +1,5 @@
 ﻿public class StockDataDay
 {
-    private readonly string _ticker;
     private readonly int _date;
     private readonly decimal _close;
     private readonly decimal _high;
@@ -8,7 +7,7 @@
     private readonly decimal _open;
     private readonly int _volume;
 
-    public StockDataDay(string ticker, int volume, decimal open, decimal low, decimal high, decimal close, int date)
+    public StockDataDay(int volume, decimal open, decimal low, decimal high, decimal close, int date)
     {
         _volume = volume;
         _open = open;
@@ -16,12 +15,6 @@
         _high = high;
         _close = close;
         _date = date;
-        _ticker = ticker;
-    }
-
-    public string Ticker
-    {
-        get { return _ticker; }
     }
 
     public int Date
