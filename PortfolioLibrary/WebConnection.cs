@@ -6,6 +6,9 @@ namespace PortfolioLibrary
 {
     public class WebConnection : IWebConnection
     {
+        public const int DaySecondCount = 23400;
+        public const int HourSecondCount = 3600;
+
         public const string InvalidUrlError = "ERROR: INVALID URL SUPPLIED";
 
         public string DownloadPageContent(string url)
@@ -36,6 +39,18 @@ namespace PortfolioLibrary
         }
 
         /// <summary>
+        /// Gets the daily tick data for a specified ticker on n days
+        /// </summary>
+        /// <param name="ticker"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+        public string GetDailyStockDataFromTicker(string ticker, int n)
+        {
+            string url = CreateConnectionString(ticker, n, DaySecondCount);
+            return DownloadPageContent(url);
+        }
+
+        /// <summary>
         ///     Creates a Google Finance link given a Ticker, Time period in days, and
         ///     tick data in seconds.
         /// </summary>
@@ -55,5 +70,7 @@ namespace PortfolioLibrary
         string DownloadPageContent(string url);
 
         string CreateConnectionString(string ticker, int period, int time);
+
+        string GetDailyStockDataFromTicker(string ticker, int n);
     }
 }

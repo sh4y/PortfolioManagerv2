@@ -9,7 +9,7 @@ namespace PortfolioUnitTests
 {
     public class DataManipulationTests
     {
-        public string[] MockData = {"0,50.04,51.04,49.04,49.54,1000", "1,70,80,60,65,2000"};
+        public static string[] MockData = {"0,50.04,51.04,49.04,49.54,1000", "1,70,80,60,65,2000"};
 
         [SetUp]
         public void Init()

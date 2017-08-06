@@ -1,10 +1,25 @@
-﻿using NUnit.Framework;
+﻿using System.Net;
+using System.Text;
+using FakeItEasy;
+using NUnit.Framework;
 using PortfolioLibrary;
 
 namespace PortfolioUnitTests
 {
     public class WebConnectionTests
     {
+        private string _info;
+        [SetUp]
+        public void Init()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string line in DataManipulationTests.MockData)
+            {
+                sb.Append(line);
+            }
+            _info = sb.ToString();
+        }
+
         [Test]
         public void TestWebConnectionString()
         {
@@ -19,6 +34,22 @@ namespace PortfolioUnitTests
         {
             var content = new WebConnection().DownloadPageContent(url);
             Assert.AreEqual(content, expOutput);
+        }
+
+        [Test]
+        public void TestGetDailyStockDataFromTicker()
+        {
+            var wc = A.Fake<IWebConnection>();
+            try
+            {
+                new WebConnection().GetDailyStockDataFromTicker("AMD", 1);
+            } catch (WebException)
+            {
+                
+            }
+            A.CallTo(() => wc.GetDailyStockDataFromTicker("", 0)).WithAnyArguments().Returns(_info);
+
+            Assert.AreEqual(wc.GetDailyStockDataFromTicker("AMD", 1), _info);
         }
     }
 }
