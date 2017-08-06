@@ -2,33 +2,26 @@
 {
     public class StockDataDay
     {
-        private readonly int _date;
-        private readonly decimal _close;
-        private readonly decimal _high;
-        private readonly decimal _low;
-        private readonly decimal _open;
-        private readonly int _volume;
-
         public StockDataDay(int volume, decimal open, decimal low, decimal high, decimal close, int date)
         {
-            _volume = volume;
-            _open = open;
-            _low = low;
-            _high = high;
-            _close = close;
-            _date = date;
+            Volume = volume;
+            Open = open;
+            Low = low;
+            High = high;
+            Close = close;
+            Date = date;
         }
 
-        public int Date => _date;
+        public int Date { get; }
 
-        public decimal Close => _close;
+        public decimal Close { get; }
 
-        public decimal High => _high;
+        public decimal High { get; }
 
-        public decimal Low => _low;
+        public decimal Low { get; }
 
-        public decimal Open => _open;
+        public decimal Open { get; }
 
-        public int Volume => _volume;
+        public int Volume { get; }
     }
 }
