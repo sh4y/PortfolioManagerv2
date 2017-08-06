@@ -24,7 +24,7 @@ namespace PortfolioLibrary
         public string[] getRawData(string content)
         {
             string[] data = content.Split('\n');
-            return Slice(data, 7, data.Length);
+            return Slice(data, 7, data.Length-1);
         }
     }
 }

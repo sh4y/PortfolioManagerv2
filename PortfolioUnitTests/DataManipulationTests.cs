@@ -23,7 +23,8 @@ namespace PortfolioUnitTests
                 {
                     sb.Append('\n');
                 }
-                if (i >= 7)
+                //14 is neglected because the last line in doc is a blank
+                if (i >= 7 && i != 14)
                 {
                     arr.Add(i.ToString());
                 }

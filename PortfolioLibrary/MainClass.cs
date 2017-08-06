@@ -9,7 +9,9 @@ namespace PortfolioLibrary
             WebConnection wc = new WebConnection();
             string url = wc.CreateConnectionString("amd", 5, 3600);
             string content = wc.DownloadPageContent(url);
-            Console.Write(content);
+            string[] arr = new DataManipulator().getRawData(content);
+            Console.WriteLine(arr[0]);
+            Console.WriteLine(arr[arr.Length-1]);
             Console.Read();
         }
     }
