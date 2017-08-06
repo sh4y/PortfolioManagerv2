@@ -1,44 +1,47 @@
 ﻿using System;
 
-public class StockPosition
+namespace PortfolioLibrary.Objects
 {
-    private readonly decimal _entrancePrice;
-
-    private readonly int _quantity;
-    private readonly string _ticker;
-
-    /// <summary>
-    ///     Creates a StockPosition object
-    /// </summary>
-    /// <param name="tckr"></param>
-    /// <param name="qty"></param>
-    /// <param name="entrPrice"></param>
-    public StockPosition(string tckr, int qty, decimal entrPrice)
+    public class StockPosition
     {
-        if (tckr == null)
-            throw new NullReferenceException();
-        _ticker = tckr.ToUpper();
-        _quantity = qty;
-        _entrancePrice = entrPrice;
-    }
+        private readonly decimal _entrancePrice;
 
-    public decimal GetEntranceValue()
-    {
-        return _entrancePrice * _quantity;
-    }
+        private readonly int _quantity;
+        private readonly string _ticker;
 
-    public string GetTicker()
-    {
-        return _ticker;
-    }
+        /// <summary>
+        ///     Creates a StockPosition object
+        /// </summary>
+        /// <param name="tckr"></param>
+        /// <param name="qty"></param>
+        /// <param name="entrPrice"></param>
+        public StockPosition(string tckr, int qty, decimal entrPrice)
+        {
+            if (tckr == null)
+                throw new NullReferenceException();
+            _ticker = tckr.ToUpper();
+            _quantity = qty;
+            _entrancePrice = entrPrice;
+        }
 
-    public int GetQuantity()
-    {
-        return _quantity;
-    }
+        public decimal GetEntranceValue()
+        {
+            return _entrancePrice * _quantity;
+        }
 
-    public decimal GetEntrancePrice()
-    {
-        return _entrancePrice;
+        public string GetTicker()
+        {
+            return _ticker;
+        }
+
+        public int GetQuantity()
+        {
+            return _quantity;
+        }
+
+        public decimal GetEntrancePrice()
+        {
+            return _entrancePrice;
+        }
     }
 }

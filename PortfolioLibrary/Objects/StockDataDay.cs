@@ -1,49 +1,34 @@
-﻿public class StockDataDay
+﻿namespace PortfolioLibrary.Objects
 {
-    private readonly int _date;
-    private readonly decimal _close;
-    private readonly decimal _high;
-    private readonly decimal _low;
-    private readonly decimal _open;
-    private readonly int _volume;
-
-    public StockDataDay(int volume, decimal open, decimal low, decimal high, decimal close, int date)
+    public class StockDataDay
     {
-        _volume = volume;
-        _open = open;
-        _low = low;
-        _high = high;
-        _close = close;
-        _date = date;
-    }
+        private readonly int _date;
+        private readonly decimal _close;
+        private readonly decimal _high;
+        private readonly decimal _low;
+        private readonly decimal _open;
+        private readonly int _volume;
 
-    public int Date
-    {
-        get { return _date; }
-    }
+        public StockDataDay(int volume, decimal open, decimal low, decimal high, decimal close, int date)
+        {
+            _volume = volume;
+            _open = open;
+            _low = low;
+            _high = high;
+            _close = close;
+            _date = date;
+        }
 
-    public decimal Close
-    {
-        get { return _close; }
-    }
+        public int Date => _date;
 
-    public decimal High
-    {
-        get { return _high; }
-    }
+        public decimal Close => _close;
 
-    public decimal Low
-    {
-        get { return _low; }
-    }
+        public decimal High => _high;
 
-    public decimal Open
-    {
-        get { return _open; }
-    }
+        public decimal Low => _low;
 
-    public int Volume
-    {
-        get { return _volume; }
+        public decimal Open => _open;
+
+        public int Volume => _volume;
     }
 }

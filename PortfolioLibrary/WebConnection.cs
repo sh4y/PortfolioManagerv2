@@ -2,55 +2,58 @@
 using System.Net;
 using System.Text;
 
-public class WebConnection : IWebConnection
+namespace PortfolioLibrary
 {
-    public const string InvalidUrlError = "ERROR: INVALID URL SUPPLIED";
-
-    public string DownloadPageContent(string url)
+    public class WebConnection : IWebConnection
     {
-        var data = "";
-        try
+        public const string InvalidUrlError = "ERROR: INVALID URL SUPPLIED";
+
+        public string DownloadPageContent(string url)
         {
-            var req = (HttpWebRequest) WebRequest.Create(url);
-            var res = (HttpWebResponse) req.GetResponse();
-            if (res.StatusCode == HttpStatusCode.OK)
+            var data = "";
+            try
             {
-                var receiveStream = res.GetResponseStream();
-                StreamReader readStream = null;
-                if (receiveStream != null)
+                var req = (HttpWebRequest) WebRequest.Create(url);
+                var res = (HttpWebResponse) req.GetResponse();
+                if (res.StatusCode == HttpStatusCode.OK)
                 {
-                    if (res.CharacterSet != null)
-                        readStream = new StreamReader(receiveStream, Encoding.GetEncoding(res.CharacterSet));
-                    if (readStream != null)
-                        data = readStream.ReadToEnd();
+                    var receiveStream = res.GetResponseStream();
+                    StreamReader readStream = null;
+                    if (receiveStream != null)
+                    {
+                        if (res.CharacterSet != null)
+                            readStream = new StreamReader(receiveStream, Encoding.GetEncoding(res.CharacterSet));
+                        if (readStream != null)
+                            data = readStream.ReadToEnd();
+                    }
                 }
             }
+            catch (WebException)
+            {
+                return InvalidUrlError;
+            }
+            return data;
         }
-        catch (WebException)
+
+        /// <summary>
+        ///     Creates a Google Finance link given a Ticker, Time period in days, and
+        ///     tick data in seconds.
+        /// </summary>
+        /// <param name="ticker"></param>
+        /// <param name="period"></param>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        public string CreateConnectionString(string ticker, int period, int time)
         {
-            return InvalidUrlError;
+            ticker = ticker.ToUpper();
+            return $"https://www.google.com/finance/getprices?i={time}&p={period}d&f=d,o,h,l,c,v&df=cpct&q={ticker}";
         }
-        return data;
     }
 
-    /// <summary>
-    ///     Creates a Google Finance link given a Ticker, Time period in days, and
-    ///     tick data in seconds.
-    /// </summary>
-    /// <param name="ticker"></param>
-    /// <param name="period"></param>
-    /// <param name="time"></param>
-    /// <returns></returns>
-    public string CreateConnectionString(string ticker, int period, int time)
+    public interface IWebConnection
     {
-        ticker = ticker.ToUpper();
-        return $"https://www.google.com/finance/getprices?i={time}&p={period}d&f=d,o,h,l,c,v&df=cpct&q={ticker}";
+        string DownloadPageContent(string url);
+
+        string CreateConnectionString(string ticker, int period, int time);
     }
-}
-
-public interface IWebConnection
-{
-    string DownloadPageContent(string url);
-
-    string CreateConnectionString(string ticker, int period, int time);
 }
