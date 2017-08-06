@@ -1,24 +1,33 @@
-﻿namespace PortfolioLibrary
+﻿using System;
+using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
+
+public class DataManipulator
 {
-    public class DataManipulator
+    private static T[] Slice<T>(T[] source, int start, int end)
     {
-        private static T[] Slice<T>(T[] source, int start, int end)
-        {
-            int len = end - start;
+        var len = end - start;
 
-            // Return new array.
-            T[] res = new T[len];
-            for (int i = 0; i < len; i++)
-            {
-                res[i] = source[i + start];
-            }
-            return res;
-        }
+        // Return new array.
+        var res = new T[len];
+        for (var i = 0; i < len; i++)
+            res[i] = source[i + start];
+        return res;
+    }
 
-        public string[] GetRawData(string content)
+    public string[] GetRawData(string content)
+    {
+        var data = content.Split('\n');
+        return Slice(data, 7, data.Length - 1);
+    }
+
+    public void GetDayInfoFromStrings(string[] data)
+    {
+        var pairs = new Dictionary<string, Type>();
+        foreach (string line in data)
         {
-            string[] data = content.Split('\n');
-            return Slice(data, 7, data.Length-1);
+            string[] info = line.Split(',');
+            
         }
     }
 }
