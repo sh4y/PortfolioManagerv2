@@ -17,10 +17,10 @@ namespace PortfolioLibrary
             return res;
         }
 
-        public string[] GetRawData(string content)
+        public string[] GetStockInfoArrayGivenRawString(string content)
         {
             var data = content.Split('\n');
-            return Slice(data, 7, data.Length - 1);
+            return Slice(data, 8, data.Length - 1);
         }
 
         public Dictionary<int, StockDataDay> GetDayInfoFromStrings(string[] data)

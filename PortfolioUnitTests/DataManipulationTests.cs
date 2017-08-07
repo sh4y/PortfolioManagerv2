@@ -30,13 +30,13 @@ namespace PortfolioUnitTests
                     sb.Append('\n');
                 }
                 //14 is neglected because the last line in doc is a blank
-                if (i >= 7 && i != 14)
+                if (i >= 8 && i != 14)
                 {
                     arr.Add(i.ToString());
                 }
             }
 
-            string[] result = new DataManipulator().GetRawData(sb.ToString());
+            string[] result = new DataManipulator().GetStockInfoArrayGivenRawString(sb.ToString());
 
             Assert.AreEqual(arr.ToArray(), result);
         }

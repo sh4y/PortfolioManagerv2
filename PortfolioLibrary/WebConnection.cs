@@ -6,7 +6,7 @@ namespace PortfolioLibrary
 {
     public class WebConnection : IWebConnection
     {
-        public const int DaySecondCount = 23400;
+        public const int DaySecondCount = 86400;
         public const int HourSecondCount = 3600;
 
         public const string InvalidUrlError = "ERROR: INVALID URL SUPPLIED";
@@ -46,7 +46,7 @@ namespace PortfolioLibrary
         /// <returns></returns>
         public string GetDailyStockDataFromTicker(string ticker, int n)
         {
-            string url = CreateConnectionString(ticker, n, DaySecondCount);
+            string url = CreateConnectionString(ticker, n+1, DaySecondCount);
             return DownloadPageContent(url);
         }
 
