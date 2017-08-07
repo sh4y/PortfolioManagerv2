@@ -3,7 +3,7 @@ using PortfolioLibrary.Objects;
 
 namespace PortfolioLibrary
 {
-    public class DataManipulator
+    public class DataManipulator : IDataManipulator
     {
         private static T[] Slice<T>(T[] source, int start, int end)
         {
@@ -153,5 +153,13 @@ namespace PortfolioLibrary
         }
 
         #endregion
+    }
+
+    public interface IDataManipulator
+    {
+        string[] GetStockInfoArrayGivenRawString(string content);
+
+        Dictionary<int, StockDataDay> GetDayInfoFromStrings(string[] data);
+
     }
 }
