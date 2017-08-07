@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Globalization;
 using PortfolioLibrary;
-using PortfolioLibrary.Objects;
 
 namespace PortfolioRunner
 {

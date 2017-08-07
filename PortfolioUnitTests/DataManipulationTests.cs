@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text;
-using FakeItEasy;
 using NUnit.Framework;
 using PortfolioLibrary;
 using PortfolioLibrary.Objects;
@@ -78,15 +77,14 @@ namespace PortfolioUnitTests
         public void TestDailyCloses(int n)
         {
             DataManipulator dm = new DataManipulator();
-            decimal[] a, b;
 
-            a = dm.GetListOfDailyClosingPrices("GS", n);
+            var a = dm.GetListOfDailyClosingPrices("GS", n);
 
             var content = new WebConnection().GetDailyStockDataFromTicker("GS", n);
             var info = dm.GetStockInfoArrayGivenRawString(content);
             var pairs = dm.GetDayInfoFromStrings(info);
 
-            b = dm.GetListOfDailyClosingPrices(pairs);
+            var b = dm.GetListOfDailyClosingPrices(pairs);
 
             Assert.AreEqual(a,b);
         }
@@ -97,15 +95,14 @@ namespace PortfolioUnitTests
         public void TestDailyLows(int n)
         {
             DataManipulator dm = new DataManipulator();
-            decimal[] a, b;
 
-            a = dm.GetListOfDailyLowPrices("GS", n);
+            var a = dm.GetListOfDailyLowPrices("GS", n);
 
             var content = new WebConnection().GetDailyStockDataFromTicker("GS", n);
             var info = dm.GetStockInfoArrayGivenRawString(content);
             var pairs = dm.GetDayInfoFromStrings(info);
 
-            b = dm.GetListOfDailyLowPrices(pairs);
+            var b = dm.GetListOfDailyLowPrices(pairs);
 
             Assert.AreEqual(a, b);
         }
@@ -116,15 +113,14 @@ namespace PortfolioUnitTests
         public void TestDailyHighs(int n)
         {
             DataManipulator dm = new DataManipulator();
-            decimal[] a, b;
 
-            a = dm.GetListOfDailyHighPrices("GS", n);
+            var a = dm.GetListOfDailyHighPrices("GS", n);
 
             var content = new WebConnection().GetDailyStockDataFromTicker("GS", n);
             var info = dm.GetStockInfoArrayGivenRawString(content);
             var pairs = dm.GetDayInfoFromStrings(info);
 
-            b = dm.GetListOfDailyHighPrices(pairs);
+            var b = dm.GetListOfDailyHighPrices(pairs);
 
             Assert.AreEqual(a, b);
         }
@@ -135,15 +131,14 @@ namespace PortfolioUnitTests
         public void TestDailyOpens(int n)
         {
             DataManipulator dm = new DataManipulator();
-            decimal[] a, b;
 
-            a = dm.GetListOfDailyOpeningPrices("GS", n);
+            var a = dm.GetListOfDailyOpeningPrices("GS", n);
 
             var content = new WebConnection().GetDailyStockDataFromTicker("GS", n);
             var info = dm.GetStockInfoArrayGivenRawString(content);
             var pairs = dm.GetDayInfoFromStrings(info);
 
-            b = dm.GetListOfDailyOpeningPrices(pairs);
+            var b = dm.GetListOfDailyOpeningPrices(pairs);
 
             Assert.AreEqual(a, b);
         }
@@ -154,15 +149,14 @@ namespace PortfolioUnitTests
         public void TestDailyVolumes(int n)
         {
             DataManipulator dm = new DataManipulator();
-            int[] a, b;
 
-            a = dm.GetListOfDailyVolume("GS", n);
+            var a = dm.GetListOfDailyVolume("GS", n);
 
             var content = new WebConnection().GetDailyStockDataFromTicker("GS", n);
             var info = dm.GetStockInfoArrayGivenRawString(content);
             var pairs = dm.GetDayInfoFromStrings(info);
 
-            b = dm.GetListOfDailyVolume(pairs);
+            var b = dm.GetListOfDailyVolume(pairs);
 
             Assert.AreEqual(a, b);
         }

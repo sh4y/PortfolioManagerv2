@@ -17,17 +17,19 @@ namespace PortfolioLibrary.Objects
         private decimal CashBalance { get; set; }
         private List<StockPosition> StockPortfolio { get; set; }
 
-        private Dictionary<string, StockPosition> IndexedPositions = new Dictionary<string, StockPosition>();
+        // ReSharper disable once FieldCanBeMadeReadOnly.Local
+        private Dictionary<string, StockPosition> _indexedPositions = new Dictionary<string, StockPosition>();
 
-        private List<string> listTickers = new List<string>();
+        // ReSharper disable once CollectionNeverQueried.Local
+        private readonly List<string> _listTickers = new List<string>();
 
         public void AddToPortfolio(StockPosition sp)
         {
             if (StockPortfolio == null)
                 StockPortfolio = new List<StockPosition>();
             StockPortfolio.Add(sp);
-            listTickers.Add(sp.GetTicker());
-            IndexedPositions.Add(sp.GetTicker(), sp);
+            _listTickers.Add(sp.GetTicker());
+            _indexedPositions.Add(sp.GetTicker(), sp);
         }
 
         public void AddCashToPortfolio(decimal amt)
@@ -52,15 +54,15 @@ namespace PortfolioLibrary.Objects
 
         public void RemovePosition(string ticker)
         {
-            if (IndexedPositions.ContainsKey(ticker))
+            if (_indexedPositions.ContainsKey(ticker))
             {
                 foreach (StockPosition sp in GetStockPortfolio().ToArray())
                 {
-                    if (sp == IndexedPositions[ticker])
+                    if (sp == _indexedPositions[ticker])
                     {
                         StockPortfolio.Remove(sp);
-                        IndexedPositions.Remove(sp.GetTicker());
-                        listTickers.Remove(sp.GetTicker());
+                        _indexedPositions.Remove(sp.GetTicker());
+                        _listTickers.Remove(sp.GetTicker());
                     }
                 }
             }
@@ -72,16 +74,16 @@ namespace PortfolioLibrary.Objects
 
         public void EditPosition(string getTicker, int newQty, decimal getEntrancePrice)
         {
-            if (IndexedPositions.ContainsKey(getTicker))
+            if (_indexedPositions.ContainsKey(getTicker))
             {
                 StockPosition sp = new StockPosition(getTicker, newQty, getEntrancePrice);
 
                 for (int i = 0; i < StockPortfolio.Count; i++)
                 {
-                    if (StockPortfolio[i] == IndexedPositions[getTicker])
+                    if (StockPortfolio[i] == _indexedPositions[getTicker])
                     {
                         StockPortfolio[i] = sp;
-                        IndexedPositions[getTicker] = sp;
+                        _indexedPositions[getTicker] = sp;
                     }
                 }
 
