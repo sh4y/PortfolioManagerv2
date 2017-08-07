@@ -9,14 +9,11 @@ namespace PortfolioRunner
     {
         public static void Main(String[] args)
         {
-            WebConnection wc = new WebConnection();
-            string content = wc.GetDailyStockDataFromTicker("AMD", 10);
             DataManipulator dm = new DataManipulator();
-            var arr = dm.GetStockInfoArrayGivenRawString(content);
-            var pairs = dm.GetDayInfoFromStrings(arr);
-            foreach (StockDataDay sdd in pairs.Values)
+            decimal[] closings = dm.GetListOfDailyClosingPrices("MS", 5);
+            foreach (Decimal d in closings)
             {
-                Console.WriteLine(sdd.Date);
+                Console.WriteLine(d);
             }
             Console.Read();
         }

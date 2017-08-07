@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PortfolioLibrary.Objects;
 
 namespace PortfolioUnitTests
@@ -20,17 +21,41 @@ namespace PortfolioUnitTests
             Assert.IsTrue(p.GetCashBalance() == 666.66m);
         }
 
-        [Test]
-        public void TestAddStockToPortfolio()
+        [TestCase("APPL", 42, 151.44)]
+        [TestCase("AAPL", 0, 141.0)]
+        public void TestAddAndRemoveStockFromPortfolio(string tkr, int qty, decimal pr)
         {
-            var sp = new StockPosition("AAPL", 42, 151.44m);
+            var sp = new StockPosition(tkr, qty, pr);
             var p = new Portfolio();
-            Assert.IsNull(p.GetStockPortfolio());
+            
+            //Test Add
             p.AddToPortfolio(sp);
             Assert.IsNotNull(p.GetStockPortfolio());
-            Assert.IsTrue(p.GetStockPortfolio()[0].GetTicker() == "AAPL");
-            Assert.IsTrue(p.GetStockPortfolio()[0].GetQuantity() == 42);
-            Assert.IsTrue(p.GetStockPortfolio()[0].GetEntrancePrice() == 151.44m);
+            Assert.IsTrue(p.GetStockPortfolio()[0].GetTicker() == tkr);
+            Assert.IsTrue(p.GetStockPortfolio()[0].GetQuantity() == qty);
+            Assert.IsTrue(p.GetStockPortfolio()[0].GetEntrancePrice() == pr);
+
+            //Test Remove
+            p.RemovePosition(sp.GetTicker());
+            Assert.IsTrue(p.GetStockPortfolio().Count == 0);
+        }
+
+        [Test]
+        public void TestRemovalOfStockNotInPortfolio()
+        {
+            var sp = new StockPosition("AAPL", 40, 140.0m);
+            var p =  new Portfolio();
+            p.AddToPortfolio(sp);
+            try
+            {
+                p.RemovePosition("GOOG");
+                Assert.Fail();
+            }
+            catch (NullReferenceException)
+            {
+                Assert.Pass();
+            }
+            Assert.Pass();
         }
     }
 }

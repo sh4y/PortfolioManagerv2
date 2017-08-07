@@ -8,6 +8,10 @@ namespace PortfolioLibrary
         private static T[] Slice<T>(T[] source, int start, int end)
         {
             var len = end - start;
+            if (len < 0)
+            {
+                return new T[0];
+            }
 
             // Return new array.
             var res = new T[len];
