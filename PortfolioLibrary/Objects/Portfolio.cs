@@ -16,6 +16,10 @@ namespace PortfolioLibrary.Objects
         private decimal CashBalance { get; set; }
         private List<StockPosition> StockPortfolio { get; set; }
 
+        //TODO: Remove From Portfolio
+
+        //TODO: Edit Portfolio
+
         public void AddToPortfolio(StockPosition sp)
         {
             if (StockPortfolio == null)

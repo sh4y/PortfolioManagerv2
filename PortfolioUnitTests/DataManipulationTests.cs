@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using PortfolioLibrary;
@@ -19,33 +18,29 @@ namespace PortfolioUnitTests
         [Test]
         public void TestRawDataSlice()
         {
-            StringBuilder sb = new StringBuilder();
-            List<String> arr = new List<String>();
+            var sb = new StringBuilder();
+            var arr = new List<string>();
 
-            for (int i = 0; i < 15; i++)
+            for (var i = 0; i < 15; i++)
             {
                 sb.Append(i.ToString());
                 if (i != 14)
-                {
                     sb.Append('\n');
-                }
                 //14 is neglected because the last line in doc is a blank
                 if (i >= 8 && i != 14)
-                {
                     arr.Add(i.ToString());
-                }
             }
 
-            string[] result = new DataManipulator().GetStockInfoArrayGivenRawString(sb.ToString());
+            var result = new DataManipulator().GetStockInfoArrayGivenRawString(sb.ToString());
 
             Assert.AreEqual(arr.ToArray(), result);
         }
 
         [TestCase(5000, 40.0, 30.0, 50.0, 45.0, 1)]
-        public void TestCreateNewStockDataObject(int volume, Decimal open, Decimal low, Decimal high, Decimal close,
+        public void TestCreateNewStockDataObject(int volume, decimal open, decimal low, decimal high, decimal close,
             int date)
         {
-            StockDataDay sdd = new StockDataDay(volume, open, low, high, close, date);
+            var sdd = new StockDataDay(volume, open, low, high, close, date);
             Assert.AreEqual(5000, sdd.Volume);
             Assert.AreEqual(40.0, sdd.Open);
             Assert.AreEqual(30.0, sdd.Low);
@@ -76,4 +71,3 @@ namespace PortfolioUnitTests
         }
     }
 }
-
