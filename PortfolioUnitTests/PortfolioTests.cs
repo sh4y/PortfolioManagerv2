@@ -55,7 +55,38 @@ namespace PortfolioUnitTests
             {
                 Assert.Pass();
             }
-            Assert.Pass();
+        }
+
+        [Test]
+        public void TestEditOfStockInPortfolio()
+        {
+            var sp = new StockPosition("AMD", 10, 14.01m);
+            var p = new Portfolio();
+
+            p.AddToPortfolio(sp);
+
+            p.EditPosition(sp.GetTicker(), sp.GetQuantity() - 5, sp.GetEntrancePrice());
+
+            Assert.IsTrue(p.GetStockPortfolio()[0].GetQuantity() == 5);
+        }
+
+        [Test]
+        public void TestEditOfStockNotInPortfolio()
+        {
+            var sp = new StockPosition("AMD", 10, 14.01m);
+            var p = new Portfolio();
+
+            p.AddToPortfolio(sp);
+
+            try
+            {
+                p.EditPosition("GOOG", 50, 1000);
+                Assert.Fail();
+            }
+            catch (NullReferenceException)
+            {
+                Assert.Pass();
+            }
         }
     }
 }

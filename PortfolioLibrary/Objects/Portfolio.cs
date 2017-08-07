@@ -17,10 +17,9 @@ namespace PortfolioLibrary.Objects
         private decimal CashBalance { get; set; }
         private List<StockPosition> StockPortfolio { get; set; }
 
-        private List<string> listTickers = new List<string>();
-        //TODO: Remove From Portfolio
+        private Dictionary<string, StockPosition> IndexedPositions = new Dictionary<string, StockPosition>();
 
-        //TODO: Edit Portfolio
+        private List<string> listTickers = new List<string>();
 
         public void AddToPortfolio(StockPosition sp)
         {
@@ -28,6 +27,7 @@ namespace PortfolioLibrary.Objects
                 StockPortfolio = new List<StockPosition>();
             StockPortfolio.Add(sp);
             listTickers.Add(sp.GetTicker());
+            IndexedPositions.Add(sp.GetTicker(), sp);
         }
 
         public void AddCashToPortfolio(decimal amt)
@@ -52,21 +52,43 @@ namespace PortfolioLibrary.Objects
 
         public void RemovePosition(string ticker)
         {
-            if (listTickers.Contains(ticker))
+            if (IndexedPositions.ContainsKey(ticker))
             {
-                var list = GetStockPortfolio().ToArray();
-                foreach (StockPosition s in list)
+                foreach (StockPosition sp in GetStockPortfolio().ToArray())
                 {
-                    if (s.GetTicker() == ticker)
+                    if (sp == IndexedPositions[ticker])
                     {
-                        this.StockPortfolio.Remove(s);
-                        this.listTickers.Remove(s.GetTicker());
+                        StockPortfolio.Remove(sp);
+                        IndexedPositions.Remove(sp.GetTicker());
+                        listTickers.Remove(sp.GetTicker());
                     }
                 }
             }
             else
             {
                 throw new NullReferenceException("Ticker does not exist");
+            }
+        }
+
+        public void EditPosition(string getTicker, int newQty, decimal getEntrancePrice)
+        {
+            if (IndexedPositions.ContainsKey(getTicker))
+            {
+                StockPosition sp = new StockPosition(getTicker, newQty, getEntrancePrice);
+
+                for (int i = 0; i < StockPortfolio.Count; i++)
+                {
+                    if (StockPortfolio[i] == IndexedPositions[getTicker])
+                    {
+                        StockPortfolio[i] = sp;
+                        IndexedPositions[getTicker] = sp;
+                    }
+                }
+
+            }
+            else
+            {
+                throw new NullReferenceException();
             }
         }
     }
