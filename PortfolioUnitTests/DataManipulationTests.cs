@@ -80,7 +80,6 @@ namespace PortfolioUnitTests
         //Web Enabled Tests
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(0)]
         public void TestDailyCloses(int n)
         {
             DataManipulator dm = new DataManipulator();
@@ -98,7 +97,6 @@ namespace PortfolioUnitTests
 
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(0)]
         public void TestDailyLows(int n)
         {
             DataManipulator dm = new DataManipulator();
@@ -116,7 +114,6 @@ namespace PortfolioUnitTests
 
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(0)]
         public void TestDailyHighs(int n)
         {
             DataManipulator dm = new DataManipulator();
@@ -134,7 +131,6 @@ namespace PortfolioUnitTests
 
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(0)]
         public void TestDailyOpens(int n)
         {
             DataManipulator dm = new DataManipulator();
@@ -152,7 +148,6 @@ namespace PortfolioUnitTests
 
         [TestCase(1)]
         [TestCase(10)]
-        [TestCase(0)]
         public void TestDailyVolumes(int n)
         {
             DataManipulator dm = new DataManipulator();

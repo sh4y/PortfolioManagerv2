@@ -11,7 +11,7 @@ namespace PortfolioUnitTests
         {
             var pairs = new DataManipulator().GetDayInfoFromStrings(DataManipulationTests.MockData);
             var prices = new[] {pairs[0].Close, pairs[1].Close};
-            Assert.AreEqual(60.02m, new StockMath().Mean(prices));
+            Assert.AreEqual(60.02m, StockMath.Mean(prices));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace PortfolioUnitTests
         {
             var pairs = new DataManipulator().GetDayInfoFromStrings(DataManipulationTests.MockData);
             var prices = new[] { pairs[0].Close, pairs[1].Close };
-            Assert.AreEqual(Math.Sqrt(99.6004), new StockMath().StandardDeviationPopulation(prices));
+            Assert.AreEqual(Math.Sqrt(99.6004), StockMath.StandardDeviationPopulation(prices));
         }
     }
 }

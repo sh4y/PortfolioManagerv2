@@ -1,5 +1,6 @@
 ﻿using System;
 using PortfolioLibrary;
+using PortfolioLibrary.Objects;
 
 namespace PortfolioRunner
 {
@@ -9,10 +10,9 @@ namespace PortfolioRunner
         {
             DataManipulator dm = new DataManipulator();
             decimal[] closings = dm.GetListOfDailyClosingPrices("AMD", 100);
-            foreach (Decimal d in closings)
-            {
-                Console.WriteLine(d);
-            }
+            Console.WriteLine(StockMath.VolatilityPriceChanges(closings) + "%");
+            Console.WriteLine(StockMath.FormattedVolatilityPriceChangesFromTicker("AMD", 100));
+            Console.WriteLine(StockMath.FormattedVolatilityPriceChangesFromTicker("GS", 100));
             Console.Read();
         }
     }
