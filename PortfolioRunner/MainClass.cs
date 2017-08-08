@@ -8,7 +8,7 @@ namespace PortfolioRunner
         public static void Main(String[] args)
         {
             DataManipulator dm = new DataManipulator();
-            decimal[] closings = dm.GetListOfDailyClosingPrices("MS", 5);
+            decimal[] closings = dm.GetListOfDailyClosingPrices("AMD", 100);
             foreach (Decimal d in closings)
             {
                 Console.WriteLine(d);

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using PortfolioLibrary.Objects;
 
 namespace PortfolioUnitTests
@@ -41,6 +42,14 @@ namespace PortfolioUnitTests
         {
             var sp = new StockPosition("TEST", q, p);
             Assert.IsTrue(expVal == sp.GetEntranceValue());
+        }
+
+        [Test]
+        public void TestCurrentPrice()
+        {
+            var sp = new StockPosition("AMD", 100, -14.11m);
+            Assert.AreNotEqual(-14.11m, sp.GetCurrentPrice());
+            Assert.AreNotEqual((Decimal)(-14.11*100), sp.GetMarketValue());
         }
     }
 }

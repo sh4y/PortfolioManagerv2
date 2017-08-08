@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PortfolioTests.cs" />
     <Compile Include="DataManipulationTests.cs" />
+    <Compile Include="MathTests.cs" />
     <Compile Include="WebConnectionTests.cs" />
   </ItemGroup>
   <ItemGroup>

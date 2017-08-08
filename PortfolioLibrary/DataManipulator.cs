@@ -10,7 +10,8 @@ namespace PortfolioLibrary
             var len = end - start;
             if (len < 0)
             {
-                return new T[0];
+                var a = new[] {source[0]};
+                return a;
             }
 
             // Return new array.
@@ -29,14 +30,13 @@ namespace PortfolioLibrary
         public Dictionary<int, StockDataDay> GetDayInfoFromStrings(string[] data)
         {
             var pairs = new Dictionary<int, StockDataDay>();
+            int date = 0;
             foreach (var line in data)
             {
                 var info = line.Split(',');
-
-                int vol, date;
+                int vol;
                 decimal open, close, low, high;
 
-                int.TryParse(info[StockDataConstants.Dateindex], out date);
                 int.TryParse(info[StockDataConstants.Volumeindex], out vol);
 
                 decimal.TryParse(info[StockDataConstants.Closeindex], out close);
@@ -47,6 +47,7 @@ namespace PortfolioLibrary
                 var sdd = new StockDataDay(vol, open, low, high, close, date);
 
                 pairs.Add(date, sdd);
+                date += 1;
             }
 
             return pairs;

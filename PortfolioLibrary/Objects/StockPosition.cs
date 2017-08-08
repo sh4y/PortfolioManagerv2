@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace PortfolioLibrary.Objects
 {
     public class StockPosition
     {
         private readonly decimal _entrancePrice;
-
+        private decimal _currentPrice;
         private readonly int _quantity;
         private readonly string _ticker;
 
@@ -22,26 +23,46 @@ namespace PortfolioLibrary.Objects
             _ticker = tckr.ToUpper();
             _quantity = qty;
             _entrancePrice = entrPrice;
+            _currentPrice = _entrancePrice;
+        }
+    #region Getters
+
+            public decimal GetEntranceValue()
+            {
+                return _entrancePrice * _quantity;
+            }
+
+            public string GetTicker()
+            {
+                return _ticker;
+            }
+
+            public int GetQuantity()
+            {
+                return _quantity;
+            }
+
+            public decimal GetEntrancePrice()
+            {
+                return _entrancePrice;
+            }
+    #endregion
+
+        private void UpdateCurrentPrice()
+        {
+            decimal price = new DataManipulator().GetListOfDailyClosingPrices(GetTicker(), 2)[0];
+            _currentPrice = price;
         }
 
-        public decimal GetEntranceValue()
+        public Decimal GetCurrentPrice()
         {
-            return _entrancePrice * _quantity;
+            UpdateCurrentPrice();
+            return _currentPrice;
         }
 
-        public string GetTicker()
-        {
-            return _ticker;
-        }
-
-        public int GetQuantity()
-        {
-            return _quantity;
-        }
-
-        public decimal GetEntrancePrice()
-        {
-            return _entrancePrice;
+        public Decimal GetMarketValue()
+        {       
+            return GetCurrentPrice() * _quantity;
         }
     }
 }

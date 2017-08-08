@@ -36,6 +36,13 @@ namespace PortfolioUnitTests
             Assert.AreEqual(arr.ToArray(), result);
         }
 
+        [Test]
+        public void TestDataSliceSubCondition()
+        {
+            var arr = new DataManipulator().GetStockInfoArrayGivenRawString("AAAA\nBBBB");
+            Assert.AreEqual(arr[0], "AAAA");
+        }
+
         [TestCase(5000, 40.0, 30.0, 50.0, 45.0, 1)]
         public void TestCreateNewStockDataObject(int volume, decimal open, decimal low, decimal high, decimal close,
             int date)
