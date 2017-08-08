@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 using PortfolioLibrary.Objects;
 
 namespace PortfolioLibrary
@@ -16,7 +13,7 @@ namespace PortfolioLibrary
             {
                 sum += arr[i];
             }
-            return (Decimal) sum / arr.Length;
+            return sum / arr.Length;
         }
 
         public Decimal VariancePopulation(Decimal[] arr)
@@ -35,11 +32,17 @@ namespace PortfolioLibrary
 
         }
 
+        public Decimal StandardDeviationPopulation(Decimal[] arr)
+        {
+            return (Decimal) Math.Sqrt((Double) VariancePopulation(arr));
+        }
+
+        //Exclude from code coverage as this has already been tested in StandardDeviationPopulation/VariancePopulation
+        [ExcludeFromCodeCoverage]
         public Decimal NDayVolatility(int n, StockPosition sp)
         {
             Decimal[] prices = new DataManipulator().GetListOfDailyClosingPrices(sp.GetTicker(), n);
-            return VariancePopulation(prices);
-
+            return StandardDeviationPopulation(prices);
         }
     }
 }
